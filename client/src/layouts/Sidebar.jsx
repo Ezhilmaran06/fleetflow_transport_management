@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   Radio,
@@ -31,12 +31,13 @@ import {
   Settings,
   Plug,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ShieldAlert
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const Sidebar = ({ isCollapsed, toggleCollapsed, isMobileOpen, closeMobile }) => {
-  const { hasRole, user } = useAuth();
+  const { user } = useAuth();
 
   const navSections = [
     {
@@ -129,36 +130,56 @@ const Sidebar = ({ isCollapsed, toggleCollapsed, isMobileOpen, closeMobile }) =>
   return (
     <aside
       className={`app-sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}
+      aria-label="Sidebar Navigation"
     >
       {/* Sidebar Header */}
       <div className="sidebar-header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
           <div
             style={{
-              width: 34,
-              height: 34,
+              width: 32,
+              height: 32,
               borderRadius: 8,
-              background: 'linear-gradient(135deg, #2563eb, #6366f1)',
+              background: 'linear-gradient(135deg, #2563EB, #4F46E5)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#ffffff',
+              color: '#FFFFFF',
               fontWeight: 800,
-              fontSize: '1rem'
+              fontSize: '0.95rem',
+              letterSpacing: '-0.02em',
+              flexShrink: 0
             }}
           >
             F
           </div>
-          <div className="brand-title">
-            <h5 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, letterSpacing: '-0.02em', color: '#ffffff' }}>
-              FLEETFLOW
-            </h5>
-            <span style={{ fontSize: '0.65rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Operations OS
-            </span>
+          <div className="brand-title" style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontSize: '0.95rem', fontWeight: 800, letterSpacing: '-0.02em', color: '#FFFFFF' }}>
+                FLEETFLOW
+              </span>
+              <span
+                style={{
+                  fontSize: '0.62rem',
+                  fontWeight: 700,
+                  backgroundColor: 'rgba(37, 99, 235, 0.25)',
+                  color: '#60A5FA',
+                  padding: '1px 5px',
+                  borderRadius: 4,
+                  letterSpacing: '0.04em'
+                }}
+              >
+                PRO
+              </span>
+            </div>
+            <div style={{ fontSize: '0.65rem', color: '#94A3B8', letterSpacing: '0.04em' }}>
+              OPERATIONS OS
+            </div>
           </div>
         </div>
+
         <button
+          type="button"
           onClick={toggleCollapsed}
           className="d-none d-lg-flex"
           style={{
@@ -166,11 +187,19 @@ const Sidebar = ({ isCollapsed, toggleCollapsed, isMobileOpen, closeMobile }) =>
             border: 'none',
             color: 'var(--text-sidebar-muted)',
             cursor: 'pointer',
-            padding: 4
+            padding: 5,
+            borderRadius: 4,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'color var(--transition-fast)'
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-sidebar-muted)')}
           title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+          aria-label={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
         >
-          {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+          {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
         </button>
       </div>
 
@@ -182,7 +211,7 @@ const Sidebar = ({ isCollapsed, toggleCollapsed, isMobileOpen, closeMobile }) =>
           }
 
           return (
-            <div key={idx} style={{ marginBottom: 14 }}>
+            <div key={idx} style={{ marginBottom: 12 }}>
               <div className="sidebar-nav-section">{sec.title}</div>
               {sec.items.map((item, i) => {
                 const Icon = item.icon;
@@ -196,7 +225,7 @@ const Sidebar = ({ isCollapsed, toggleCollapsed, isMobileOpen, closeMobile }) =>
                     }
                     title={isCollapsed ? item.label : undefined}
                   >
-                    <Icon size={18} style={{ flexShrink: 0 }} />
+                    <Icon size={17} style={{ flexShrink: 0 }} />
                     <span>{item.label}</span>
                   </NavLink>
                 );
@@ -206,18 +235,46 @@ const Sidebar = ({ isCollapsed, toggleCollapsed, isMobileOpen, closeMobile }) =>
         })}
       </div>
 
-      {/* Company Footer */}
+      {/* Tenant Status Footer */}
       {!isCollapsed && user?.company && (
         <div
           style={{
-            padding: '12px 16px',
-            borderTop: '1px solid var(--border-color)',
-            fontSize: '0.75rem',
-            color: 'var(--text-sidebar-muted)'
+            padding: '12px 14px',
+            borderTop: '1px solid var(--border-sidebar)',
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 8
           }}
         >
-          <div style={{ fontWeight: 600, color: 'var(--text-sidebar)' }}>{user.company.name}</div>
-          <div>Code: {user.company.code}</div>
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <div
+              style={{
+                fontWeight: 600,
+                color: '#E2E8F0',
+                fontSize: '0.785rem',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              {user.company.name}
+            </div>
+            <div style={{ fontSize: '0.675rem', color: '#94A3B8' }}>
+              Tenant: <span style={{ fontFamily: 'monospace' }}>{user.company.code}</span>
+            </div>
+          </div>
+          <span
+            style={{
+              width: 7,
+              height: 7,
+              borderRadius: '50%',
+              backgroundColor: 'var(--ff-success)',
+              boxShadow: '0 0 8px rgba(22, 163, 74, 0.6)'
+            }}
+            title="Tenant Connection Active"
+          />
         </div>
       )}
     </aside>

@@ -105,55 +105,87 @@ export default function App() {
       >
         <Route index element={<Navigate to="/dashboard" replace />} />
 
-        {/* Dashboard */}
+        {/* Dashboard & Operations */}
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="dashboard/live-ops" element={<LiveOperationsPage />} />
+        <Route path="live-operations" element={<LiveOperationsPage />} />
         <Route path="dashboard/tracking" element={<LiveTrackingPage />} />
+        <Route path="live-tracking" element={<LiveTrackingPage />} />
         <Route path="dashboard/operations-center" element={<OperationsCenterPage />} />
+        <Route path="operations-center" element={<OperationsCenterPage />} />
 
         {/* Fleet */}
         <Route path="fleet/vehicles" element={<VehiclesPage />} />
+        <Route path="vehicles" element={<VehiclesPage />} />
         <Route path="fleet/vehicles/:id" element={<VehicleDetailPage />} />
+        <Route path="vehicles/:id" element={<VehicleDetailPage />} />
         <Route path="fleet/groups" element={<VehicleGroupsPage />} />
+        <Route path="vehicle-groups" element={<VehicleGroupsPage />} />
         <Route path="fleet/drivers" element={<DriversPage />} />
+        <Route path="drivers" element={<DriversPage />} />
         <Route path="fleet/drivers/:id" element={<DriverDetailPage />} />
+        <Route path="drivers/:id" element={<DriverDetailPage />} />
         <Route path="fleet/performance" element={<DriverPerformancePage />} />
+        <Route path="driver-performance" element={<DriverPerformancePage />} />
         <Route path="fleet/documents" element={<DocumentsPage />} />
+        <Route path="documents" element={<DocumentsPage />} />
 
         {/* Dispatch */}
         <Route path="dispatch/trips" element={<TripsPage />} />
+        <Route path="trips" element={<TripsPage />} />
         <Route path="dispatch/trips/:id" element={<TripDetailPage />} />
+        <Route path="trips/:id" element={<TripDetailPage />} />
         <Route path="dispatch/board" element={<DispatchBoardPage />} />
+        <Route path="dispatch-board" element={<DispatchBoardPage />} />
         <Route path="dispatch/deliveries" element={<DeliveriesPage />} />
+        <Route path="deliveries" element={<DeliveriesPage />} />
         <Route path="dispatch/deliveries/:id" element={<DeliveryDetailPage />} />
+        <Route path="deliveries/:id" element={<DeliveryDetailPage />} />
         <Route path="dispatch/routes" element={<RoutesPage />} />
+        <Route path="routes" element={<RoutesPage />} />
         <Route path="dispatch/customers" element={<CustomersPage />} />
+        <Route path="customers" element={<CustomersPage />} />
 
         {/* Maintenance */}
+        <Route path="maintenance" element={<MaintenancePage />} />
         <Route path="maintenance/work-orders" element={<MaintenancePage />} />
         <Route path="maintenance/schedule" element={<ServiceSchedulePage />} />
+        <Route path="service-schedule" element={<ServiceSchedulePage />} />
 
         {/* Finance */}
         <Route path="finance/fuel" element={<FuelPage />} />
+        <Route path="fuel" element={<FuelPage />} />
         <Route path="finance/expenses" element={<ExpensesPage />} />
+        <Route path="expenses" element={<ExpensesPage />} />
         <Route path="finance/budgets" element={<BudgetsPage />} />
+        <Route path="budgets" element={<BudgetsPage />} />
         <Route path="finance/costs" element={<CostAnalysisPage />} />
+        <Route path="cost-analysis" element={<CostAnalysisPage />} />
 
         {/* Safety */}
         <Route path="safety/incidents" element={<IncidentsPage />} />
+        <Route path="incidents" element={<IncidentsPage />} />
         <Route path="safety/incidents/:id" element={<IncidentDetailPage />} />
+        <Route path="incidents/:id" element={<IncidentDetailPage />} />
         <Route path="safety/compliance" element={<CompliancePage />} />
+        <Route path="compliance" element={<CompliancePage />} />
         <Route path="safety/scores" element={<DriverSafetyPage />} />
+        <Route path="driver-safety" element={<DriverSafetyPage />} />
 
         {/* Analytics & Reports */}
+        <Route path="analytics" element={<AnalyticsHubPage />} />
         <Route path="analytics/hub" element={<AnalyticsHubPage />} />
+        <Route path="reports" element={<ReportBuilderPage />} />
         <Route path="reports/builder" element={<ReportBuilderPage />} />
         <Route path="reports/saved" element={<SavedReportsPage />} />
 
         {/* Communication */}
         <Route path="communication/notifications" element={<NotificationsPage />} />
+        <Route path="notifications" element={<NotificationsPage />} />
         <Route path="communication/messages" element={<MessagesPage />} />
+        <Route path="messages" element={<MessagesPage />} />
         <Route path="communication/announcements" element={<AnnouncementsPage />} />
+        <Route path="announcements" element={<AnnouncementsPage />} />
 
         {/* Administration */}
         <Route path="admin/users" element={<UsersPage />} />
